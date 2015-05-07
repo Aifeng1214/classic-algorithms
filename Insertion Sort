@@ -1,0 +1,23 @@
+//Mian principle : insert A[j] into the sorted A[0..j-1]
+//every sort makes sure that the A[0...j-1] is sorted    N-1 times sorts
+#include <stdio.h>
+void main()
+{
+    int a[]={3,1,4,1,5,9,2,6,5};
+    int i,j,tmp;
+    int n=9;
+    for(i=1;i<9;i++)
+    {
+      tmp=a[i];
+      j=i-1;
+      while(j>=0 && a[j]>tmp)
+      {
+        a[j+1]=a[j];
+        j=j-1;
+      }
+      a[j+1]=tmp;
+    }
+    for(i=0;i<9;i++)
+    {printf("%d",a[i]);}
+}
+    
