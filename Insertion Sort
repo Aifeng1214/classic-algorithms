@@ -10,12 +10,12 @@ void main()
     {
       tmp=a[i];
       j=i-1;
-      while(j>=0 && a[j]>tmp)
+      while(j>=0 && a[j]>tmp)   //This circle makes every intger right shift when smaller than A[i]
       {
         a[j+1]=a[j];
         j=j-1;
       }
-      a[j+1]=tmp;
+      a[j+1]=tmp;   //a[j+1} because in the end of the above circle j=j-1
     }
     for(i=0;i<9;i++)
     {printf("%d",a[i]);}
