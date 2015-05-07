@@ -1,5 +1,5 @@
 //Mian principle : insert A[j] into the sorted A[0..j-1]
-//every sort makes sure that the A[0...j-1] is sorted    N-1 times sorts
+//Every sort makes sure that the A[0...j-1] is sorted    N-1 times sorts
 #include <stdio.h>
 void main()
 {
