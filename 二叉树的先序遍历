@@ -1,0 +1,31 @@
+先序遍历的结点访问顺序：根→左→右
+/***************递归遍历***************/
+void PreOrder(TreeNode* root)
+{
+    if(!root) return;
+	  cout<<root->data;
+	  PreOrder(root->lchild);
+	  PreOrder(root->rchild);
+}
+
+
+/***************非递归遍历***************/
+void PreOrder(TreeNode* root)
+{
+    if(!root) return;
+    stack<TreeNode*> stk;
+    TreeNode* cur=root;
+    while(cur!=NULL || !stk.empty())
+    {
+        while(cur){
+            cout<<cur->data; //输出根节点
+            stk.push(cur);   //保存路径
+            cur=cur->lchild; //一直找到根节点的最左子节点并分别输出，cur指向最左子节点的左子树(NULL)
+        }
+        if(!stk.empty()){                                                         
+            cur=stk.top();
+            stk.pop();
+            cur=cur->right;
+        }
+    }
+}
