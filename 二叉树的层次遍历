@@ -1,0 +1,17 @@
+节点访问顺序：从上至下，从左至右
+void LevelOrder(TreeNode* root)
+{
+    if(!root) return;
+    queue<TreeNode*>q;
+    TreeNode* cur=NULL;
+    q.push(root);
+    while(!q.empty()){
+        cur=q.front();
+        cout<<cur->data;
+        if(cur->rchild)
+            q.push(cur->rchild);
+        if(cur->lchild)
+            q.push(cur->lchild);
+        q.pop();
+    }
+}
