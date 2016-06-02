@@ -1,0 +1,29 @@
+结点访问顺序：左→根→右
+/***************递归遍历***************/
+void InOrder(TreeNode* root)
+{
+    if(!root) return;
+    InOrder(root->left);
+    cout<<root->data;
+    InOrder(root->right);
+}
+
+/***************非递归遍历***************/
+void InOrder(TreeNode* root)
+{
+    if(!root) return;
+    stack<TreeNode*>stk;
+    TreeNode* cur=root;
+    while(cur || !stk.empty()){
+        while(cur){
+            s.push(cur);
+            cur=cur->lchild;
+        }
+        while(!stk.empty()){
+            cur=stk.top();
+            cout<<cur->data;
+            stk.pop();
+            cur=cur->rchild;
+       }
+    }
+}
