@@ -25,7 +25,7 @@ void PreOrder(TreeNode* root)
         if(!stk.empty()){                                                         
             cur=stk.top();
             stk.pop();
-            cur=cur->right;
+            cur=cur->rchild;
         }
     }
 }
