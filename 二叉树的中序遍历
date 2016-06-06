@@ -25,7 +25,7 @@ void InOrder(TreeNode* root)
             s.push(cur);
             cur=cur->lchild;
         }
-        while(!stk.empty()){
+        if(!stk.empty()){
             cur=stk.top();
             cout<<cur->data;
             stk.pop();
