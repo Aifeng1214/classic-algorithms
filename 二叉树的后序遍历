@@ -25,7 +25,7 @@ void PostOrder(TreeNode *root)     //非递归后序遍历
            (pre!=NULL&&(pre==cur->lchild||pre==cur->rchild)))
         {
             cout<<cur->data;  //如果当前结点没有孩子结点或者孩子节点都已被访问过 
-              s.pop();
+            s.pop();
             pre=cur; 
         }
         else
