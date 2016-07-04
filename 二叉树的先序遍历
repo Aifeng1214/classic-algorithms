@@ -3,9 +3,9 @@
 void PreOrder(TreeNode* root)
 {
     if(!root) return;
-	  cout<<root->data;
-	  PreOrder(root->lchild);
-	  PreOrder(root->rchild);
+    cout<<root->data;
+    PreOrder(root->lchild);
+    PreOrder(root->rchild);
 }
 
 
