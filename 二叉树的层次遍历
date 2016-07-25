@@ -15,3 +15,31 @@ void LevelOrder(TreeNode* root)
         q.pop();
     }
 }
+
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode *root) {
+        vector<vector<int>>res;
+        if(!root) return res;
+        vector<int>tmp;
+        queue<TreeNode*> que;
+        TreeNode *cur=NULL;
+        que.push(root);
+        que.push(NULL);
+        while(!que.empty()){
+            cur=que.front();
+            que.pop();
+            if(cur==NULL){
+                res.push_back(tmp);
+                tmp.clear();
+                if(que.size()>0)
+                    que.push(NULL);
+            }else{
+                tmp.push_back(cur->val);
+                if(cur->left) que.push(cur->left);
+                if(cur->right) que.push(cur->right);
+            }
+        }
+        return res;
+    }
+};
