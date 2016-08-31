@@ -1,0 +1,20 @@
+//思路：
+判断一棵树是不是镜像的，即判断左右子树是否对称。
+左右子树对称的条件：
+1、根节点的值相等
+2、左子树的左节点与右子树的右节点对称；左子树的右节点和右子树的左节点对称。
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(!root)
+            return true;
+        return helper(root->left,root->right);
+    }
+    bool helper(TreeNode* left, TreeNode* right){
+        if(!left && !right)           //前2个if是递归终止条件
+            return true;
+        if((!left && right) || (left && !right))
+            return false;
+        return left->val==right->val && helper(left->right,right->left) && helper(left->left,right->right);
+    }
+};
