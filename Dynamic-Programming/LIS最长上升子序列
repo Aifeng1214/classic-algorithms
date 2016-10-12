@@ -1,0 +1,28 @@
+For example, Given [10, 9, 2, 5, 3, 7, 101, 18],
+The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. 
+
+//dp思路：
+1.dp[i]表示以nums[i]作为上升子序列的最后一个元素的话, 其长度的值。
+2.对于每一个位置i上的元素，存在状态转移公式：
+dp[i]=max(dp[j]+1, dp[i]) (nums[j]<nums[i] && j<i)
+
+https://leetcode.com/problems/longest-increasing-subsequence/
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        if(nums.size()<2) return nums.size();
+        
+        int len=nums.size(),res=0;
+        vector<int>dp(len,1);
+        
+        for(int i=1;i<len;++i){
+            for(int j=i-1;j>=0;--j){
+                if(nums[j]<nums[i]){
+                    dp[i]=max(dp[j]+1,dp[i]);
+                }
+            }
+            res=max(res,dp[i]);
+        }
+        return res;
+    }
+};
