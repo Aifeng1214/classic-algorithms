@@ -1,0 +1,53 @@
+LCS问题即最长公共子序列问题，它不要求所求得的字符在所给的字符串中是连续的
+例如：输入两个字符串BDCABA和ABCBDAB，字符串BCBA和BDAB都是是它们的最长公共子序列，则输出它们的长度4。
+
+//dp思路：
+1.dp[i][j]表示2个字符串以第i个和第j个字符为结尾的子字符串 所构成的最长公共子序列的长度。
+2.状态转移方程：
+           0                                                  i<0或j<0;
+dp[i][j]=  dp[i-1][j-1]+1                                     i>0&&j>0 s[i]==t[j]
+           max(dp[i-1][j] , dp[i][j-1])                       i>0&&j>0 s[i]!=t[j]
+           
+例题：构造回文
+给定一个字符串s，你可以从中删除一些字符，使得剩下的串是一个回文串。如何删除才能使得回文串最长呢？
+输出需要删除的字符个数。
+Input:
+abcda
+google
+
+Output:
+2
+2
+
+// AC代码
+#include <string>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int LCS(string& s, string& t){
+	vector<vector<int>>dp(s.size() + 1, vector<int>(t.size() + 1, 0));
+	for (int i = 1; i <= s.size(); ++i){
+		for (int j = 1; j <= t.size(); ++j){
+			if (s[i ] == t[j ]){
+				dp[i][j] = dp[i - 1][j - 1] + 1;
+			}
+			else{
+				dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+			}
+		}
+	}
+	return dp[s.size()][t.size()];
+}
+
+int main()
+{
+	string s;
+	while (cin >> s){
+		string t = s;
+		reverse(s.begin(), s.end());
+		cout << s.size()-LCS(s, t) << endl;
+	}
+	return 0;
+}
