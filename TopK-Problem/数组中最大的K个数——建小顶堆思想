@@ -1,0 +1,54 @@
+//基本思路：
+1.先建一个K个元素的小顶堆，再从K+1个元素开始遍历
+2.如果第i个元素大于堆顶，则交换，同时做堆调整，保证最小堆
+3.遍历完整个数组，最后剩下的堆中元素就是所求的Top K
+建堆时间复杂度O(n) 堆调整时间复杂度O(lonK)  总的时间复杂度O（n*logK）
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+void heap_adjust(vector<int>&vec, int i, int len)
+{
+	int child;
+	for (; 2 * i + 1 < len; i=child){
+		child = 2 * i + 1;
+		if (child<len - 1 && vec[child]>vec[child + 1])
+			child++;
+		if (vec[i] > vec[child])
+			swap(vec[i], vec[child]);
+		else
+			break;
+	}
+}
+
+void build_heap(vector<int>&vec, int len)
+{
+	for (int i = len / 2 - 1; i >= 0; --i)
+		heap_adjust(vec, i, len);
+}
+
+int main()
+{
+	int n, k;
+	cin >> n >> k;
+	vector<int>vec(n);
+	vector<int>heap(k);
+	for (int i = 0; i < n; ++i){
+		cin >> vec[i];
+	}
+	for (int i = 0; i < k; ++i)
+		heap[i] = vec[i];
+	build_heap(heap, k);
+	for (int i = k; i < n; ++i){
+		if (vec[i] > heap[0]){
+			swap(vec[i], heap[0]);
+			heap_adjust(heap, 0, k);
+		}
+	}
+	for (auto x : heap)
+		cout << x << " ";
+	cout << endl;
+	return 0;
+}
