@@ -1,0 +1,50 @@
+一、利用快排partition的思想，递归求解。平均时间复杂度O(n)
+
+#include <string>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int find_kth(vector<int>& vec, int low, int high, int k)
+{
+	if (low < high)
+	{
+		int i = low, j = high;
+		int pivot = vec[i];
+		while (i < j)
+		{
+			while (i < j && vec[j] >= pivot)
+				j--;
+			if (i < j)
+				vec[i++] = vec[j];
+			while (i < j && vec[i] <= pivot)
+				i++;
+			if (i<j)
+				vec[j--] = vec[i];
+		}
+		vec[i] = pivot;
+    //如果i-low+1==k，即i位置上从low开始数第k个，直接返回
+		if (i - low + 1 == k){
+			return pivot;
+		}
+    //如果i - low + 1 < k,即第k大的数在位置i的后面，对[i+1, high]做partition，找其中的第k-1-i个数
+		else if (i - low + 1 < k){
+			return find_kth(vec, i + 1, high, k - 1 - i);
+		}
+		else{
+			return find_kth(vec, low, i, k );
+		}
+	}
+}
+
+int main()
+{
+	int n, k;
+	cin >> n >> k;
+	vector<int>vec(n);
+	for (int i = 0; i < n; ++i){
+		cin >> vec[i];
+	}
+	cout << find_kth(vec, 0, n - 1, k) << endl;
+}
