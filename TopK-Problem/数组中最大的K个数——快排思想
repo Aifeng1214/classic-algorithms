@@ -1,5 +1,5 @@
 //基于快排的思路
-find_topkth 返回的是排序后的数组第k-1大的数的下标。
+find_topkth 返回的是排序后的数组第k-1大的数的下标。 时间复杂度O(n*logk)
 
 #include <string>
 #include <iostream>
