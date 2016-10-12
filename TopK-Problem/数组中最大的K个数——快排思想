@@ -1,0 +1,53 @@
+//基于快排的思路
+find_topkth 返回的是排序后的数组第k-1大的数的下标。
+
+#include <string>
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int find_topkth(vector<int>& vec, int low, int high, int k)
+{
+	if (low < high)
+	{
+		int i = low, j = high;
+		int pivot = vec[i];
+		while (i < j)
+		{
+			while (i < j && vec[j] >= pivot)
+				j--;
+			if (i < j)
+				vec[i++] = vec[j];
+			while (i < j && vec[i] <= pivot)
+				i++;
+			if (i<j)
+				vec[j--] = vec[i];
+		}
+		vec[i] = pivot;
+		if (high-i == k){
+			return i;
+		}
+		else if (high - i < k){
+			return find_topkth(vec, low, i, k + i - high);
+		}
+		else{
+			return find_topkth(vec, i+1, high, k);
+		}
+	}
+}
+
+int main()
+{
+	int n, k;
+	cin >> n >> k;
+	vector<int>vec(n);
+	for (int i = 0; i < n; ++i){
+		cin >> vec[i];
+	}
+	int index = find_topkth(vec, 0, n - 1, k);
+	for (int i = index + 1; i < n; ++i)
+		cout << vec[i] << " ";
+	cout << endl;
+	return 0;
+}
